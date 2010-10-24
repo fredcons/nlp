@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    - Application context definition
+    $Id: extractor-core-test-context.xml 30 2010-02-17 16:51:17Z fredcons $
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:nlp="http://www.fc.org/schema/nlp"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.fc.org/schema/nlp http://www.fc.org/schema/nlp/nlp.xsd">
+        
+        <import resource="classpath:/extractor-core-context.xml" />
+        
+        <!-- 
+        <util:list id="documents">
+            <bean class="java.lang.String"><constructor-arg value="classpath:/data/text.doc" /></bean>
+            <bean class="java.lang.String"><constructor-arg value="classpath:/data/text.pdf" /></bean>
+            <bean class="java.lang.String"><constructor-arg value="classpath:/data/text.html" /></bean>            
+        </util:list>
+               -->  
+               
+        <util:list id="documents">
+            <value>classpath:/data/text.doc</value>
+            <value>classpath:/data/text.pdf</value>
+            <value>classpath:/data/text.html</value>
+        </util:list>       
+</beans>          

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    - Application context definition
+    $Id$
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:nlp="http://www.fc.org/schema/nlp"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.fc.org/schema/nlp http://www.fc.org/schema/nlp/nlp.xsd"
+                           default-autowire="byName">
+        
+        <import resource="classpath:/categorizer-core-context.xml" />
+        
+        <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:common.properties</value>
+                </list>
+            </property>
+        </bean>        
+               
+        <bean id="ngramCategorizer" class="org.fc.categorizer.services.impl.CategorizerImpl">
+       		<property name="analyzer" ref="ngramAnalyzer" />
+       		<property name="reference" ref="reference" />
+        </bean> 
+        
+        <!-- bean id="wordCategorizer" class="org.fc.categorizer.services.impl.CategorizerImpl">
+            <property name="analyzer" ref="wordAnalyzer" />
+            <property name="reference" ref="reference" />
+        </bean--> 
+        
+        <!-- bean id="shingleCategorizer" class="org.fc.categorizer.services.impl.CategorizerImpl">
+            <property name="analyzer" ref="shingleAnalyzer" />
+            <property name="reference" ref="reference" />
+        </bean-->
+        
+        <nlp:corpus id="reference">        	
+			<nlp:analyzableCategory name="fr">
+                <nlp:resourceDocument path="classpath:/data/leipzigcorpora/fr/sentences_fr_${leipzig.data.size}k.txt.gz" />
+            </nlp:analyzableCategory>
+            <nlp:analyzableCategory name="en">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/en/sentences_en_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>                    
+			<nlp:analyzableCategory name="de">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/de/sentences_de_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="it">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/it/sentences_it_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="nl">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/nl/sentences_nl_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="dk">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/dk/sentences_dk_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="no">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/no/sentences_no_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="fi">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/fi/sentences_fi_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="se">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/se/sentences_se_${leipzig.data.size}k.txt.gz" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="jp">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/jp/sentences_jp_${leipzig.data.size}k.txt.gz" encoding="UTF-8" />
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="kr">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/kr/sentences_kr_${leipzig.data.size}k.txt.gz" encoding="UTF-8" /> 
+			</nlp:analyzableCategory>
+			<nlp:analyzableCategory name="tr">
+			     <nlp:resourceDocument path="classpath:/data/leipzigcorpora/tr/sentences_tr_${leipzig.data.size}k.txt.gz" encoding="ISO-8859-9" />  
+			</nlp:analyzableCategory>    
+            <nlp:analyzableCategory name="es">
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/es/alvarez_transformacion.txt.gz" />
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/es/los_argonautas.txt.gz" />  
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/es/zalacain_el_aventurero.txt.gz" /> 
+            </nlp:analyzableCategory>    
+            <nlp:analyzableCategory name="pt">
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pt/a_morte_vence.txt.gz" />
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pt/amores_deputado.txt.gz" />  
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pt/os_bracos_de_mindello.txt.gz" /> 
+            </nlp:analyzableCategory> 
+            <nlp:analyzableCategory name="cz">
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/cz/hore_dedinu.txt.gz" encoding="UTF-8" />
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/cz/krestansko_katolickem.txt.gz" encoding="UTF-8" />  
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/cz/pasacek_ali.txt.gz" encoding="UTF-8" /> 
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/cz/stafeta.txt.gz" encoding="UTF-8" /> 
+            </nlp:analyzableCategory>    
+            <nlp:analyzableCategory name="hu">
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/hu/a_mester.txt.gz" encoding="UTF-8" />
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/hu/az_arany_szalamandra.txt.gz" encoding="UTF-8" />  
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/hu/az_atlasz_czalad.txt.gz" encoding="UTF-8" /> 
+            </nlp:analyzableCategory>
+            <nlp:analyzableCategory name="pl">
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pl/anhelli.txt.gz" encoding="UTF-8" />
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pl/bajki.txt.gz" encoding="UTF-8" />  
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pl/balady_y_romanza.txt.gz" encoding="UTF-8" /> 
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pl/jeden_miesiac_zycia.txt.gz" encoding="UTF-8" />
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pl/na_smierc.txt.gz" encoding="UTF-8" />  
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/pl/szopka.txt.gz" encoding="UTF-8" />
+            </nlp:analyzableCategory> 
+            <nlp:analyzableCategory name="ro">
+                 <nlp:resourceDocument path="classpath:/data/gutemberg/ro/creierul.txt.gz" encoding="UTF-8" />
+            </nlp:analyzableCategory>                    
+        </nlp:corpus>            
+        
+        <nlp:analyzableCategory id="frenchTestCategory" name="fr">
+            <nlp:resourceDocument path="classpath:/data/fr/zola_assomoir.txt.gz" />
+            <nlp:stringDocument value="du texte français" />
+        </nlp:analyzableCategory>
+
+        <nlp:analyzedCategory id="analyzedFrenchTestCategory" name="fr">
+            <nlp:termAnalysis path="classpath:data/fr/fr.txt" topTerms="1000" type="NGRAMS"/>
+            <nlp:termAnalysis path="classpath:data/fr/fr_words.txt" topTerms="10000" type="WORDS"/>
+        </nlp:analyzedCategory>
+        
+        <nlp:analyzableCategory id="danishTestCategory" name="dk">
+            <nlp:resourceDocument path="classpath:/data/dk/bedrifter.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/dk/det_graa_hus.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/dk/det_hvide_hus.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/dk/stauder.txt.gz" />
+        </nlp:analyzableCategory>
+        
+        <nlp:analyzableCategory id="finnishTestCategory" name="fi">
+            <nlp:resourceDocument path="classpath:/data/fi/liv.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/fi/helgelannin_sankarit.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/fi/ojennusnuora.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/fi/rakkaita_sukulaisia.txt.gz" />
+        </nlp:analyzableCategory>   
+        
+        <nlp:analyzableCategory id="swedishTestCategory" name="se">
+            <nlp:resourceDocument path="classpath:/data/se/arbetets_herravalde.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/se/noveller.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/se/polarforskningen.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/se/singoalla.txt.gz" />
+        </nlp:analyzableCategory>
+        
+        <nlp:analyzableCategory id="norwegianTestCategory" name="no">
+            <nlp:resourceDocument path="classpath:/data/no/catilina.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/no/sult.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/no/en_nihilist.txt.gz" />
+            <nlp:resourceDocument path="classpath:/data/no/den_engelske_lods.txt.gz" />
+        </nlp:analyzableCategory> 
+        
+        <bean id="dumpDirectory" class="java.lang.String">
+            <constructor-arg value="${dump.directory}" />
+        </bean>
+</beans>          

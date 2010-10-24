@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.fc.org/schema/nlp"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    targetNamespace="http://www.fc.org/schema/nlp"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans" />
+
+    <xsd:element name="corpus">                
+        <xsd:complexType>             
+            <xsd:choice id="categories">
+                <xsd:element minOccurs="0" maxOccurs="unbounded" ref="category"/>        
+            </xsd:choice>
+            <xsd:attribute name="id" type="xsd:string" use="required" />   
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="document">
+        <xsd:annotation>
+            <xsd:documentation>The base superclass for all documents</xsd:documentation>
+        </xsd:annotation>    
+    </xsd:element>    
+    
+    <xsd:element name="category">
+        <xsd:annotation>
+            <xsd:documentation>The base superclass for all catzgories</xsd:documentation>
+        </xsd:annotation>    
+    </xsd:element> 
+    
+    <xsd:element name="analyzableCategory" substitutionGroup="category">                
+        <xsd:complexType>             
+            <xsd:choice id="documents">
+                <xsd:element minOccurs="0" maxOccurs="unbounded" ref="document"/>      
+            </xsd:choice>     
+            <xsd:attribute name="id" type="xsd:string" />
+            <xsd:attribute name="name" type="xsd:string" use="required" />   
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="analyzedCategory" substitutionGroup="category">                
+        <xsd:complexType>             
+            <xsd:choice id="termAnalysises">
+                <xsd:element minOccurs="0" maxOccurs="unbounded" ref="termAnalysis"/>      
+            </xsd:choice>     
+            <xsd:attribute name="id" type="xsd:string" />
+            <xsd:attribute name="name" type="xsd:string" use="required" />   
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="stringDocument" substitutionGroup="document">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string" />
+            <xsd:attribute name="value" type="xsd:string" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="fileDocument" substitutionGroup="document">
+        <xsd:complexType>
+            <xsd:attribute name="path" type="xsd:string" use="required" />
+            <xsd:attribute name="encoding" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="resourceDocument" substitutionGroup="document">
+        <xsd:complexType>
+            <xsd:attribute name="path" type="xsd:string" use="required" />
+            <xsd:attribute name="encoding" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+
+	<xsd:element name="termAnalysis">
+        <xsd:complexType>
+            <xsd:attribute name="path" type="xsd:string" use="required" />
+            <xsd:attribute name="topTerms" type="xsd:int" />
+            <xsd:attribute name="type" type="xsd:string" use="required" />
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

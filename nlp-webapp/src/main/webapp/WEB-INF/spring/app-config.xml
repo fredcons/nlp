@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:nlp="http://www.fc.org/schema/nlp"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.fc.org/schema/nlp http://www.fc.org/schema/nlp/nlp.xsd">
+    
+    <import resource="classpath:categorizer-core-context.xml"/>
+    <import resource="classpath:extractor-core-context.xml"/>
+    
+    <bean id="ngramCategorizer" class="org.fc.categorizer.services.impl.CategorizerImpl">
+        <property name="analyzer" ref="ngramAnalyzer" />
+        <property name="textExtractor" ref="textExtractor" />
+        <property name="reference" ref="reference" />
+    </bean> 
+    
+    <nlp:corpus id="reference">         
+        <nlp:analyzedCategory name="cz">
+            <nlp:termAnalysis path="classpath:data/ngrams/cz.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/cz.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="de">
+            <nlp:termAnalysis path="classpath:data/ngrams/de.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/de.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="dk">
+            <nlp:termAnalysis path="classpath:data/ngrams/dk.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/dk.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="es">
+            <nlp:termAnalysis path="classpath:data/ngrams/es.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/es.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="en">
+            <nlp:termAnalysis path="classpath:data/ngrams/en.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/en.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="fi">
+            <nlp:termAnalysis path="classpath:data/ngrams/fi.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/fi.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="fr">
+            <nlp:termAnalysis path="classpath:data/ngrams/fr.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/fr.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="hu">
+            <nlp:termAnalysis path="classpath:data/ngrams/hu.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/hu.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="it">
+            <nlp:termAnalysis path="classpath:data/ngrams/it.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/it.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="jp">
+            <nlp:termAnalysis path="classpath:data/ngrams/jp.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/jp.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="kr">
+            <nlp:termAnalysis path="classpath:data/ngrams/kr.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/kr.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="nl">
+            <nlp:termAnalysis path="classpath:data/ngrams/nl.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/nl.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="no">
+            <nlp:termAnalysis path="classpath:data/ngrams/no.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/no.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="pl">
+            <nlp:termAnalysis path="classpath:data/ngrams/pl.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/pl.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="pt">
+            <nlp:termAnalysis path="classpath:data/ngrams/pt.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/pt.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="ro">
+            <nlp:termAnalysis path="classpath:data/ngrams/ro.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/ro.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="se">
+            <nlp:termAnalysis path="classpath:data/ngrams/se.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/se.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+        <nlp:analyzedCategory name="tr">
+            <nlp:termAnalysis path="classpath:data/ngrams/tr.txt" topTerms="1000" type="NGRAMS"/>
+            <!-- nlp:termAnalysis path="classpath:data/words/tr.txt" type="WORDS"/-->
+        </nlp:analyzedCategory>
+    </nlp:corpus>
+    
+    <context:component-scan base-package="org.fc.nlp" />
+    
+</beans>
